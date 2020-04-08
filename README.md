@@ -16,26 +16,32 @@ A fast food chain claims that the mean time to order food at their restaurants i
 
 Follow the 5 steps shown in previous lesson and use $\alpha$ = 0.05. 
 
-
-```python
-# State you null and alternative hypotheses
-
-```
+### State you null and alternative hypotheses
+Null Hypothesis: the observed order time is no different than the claim of 60 second wait time.
+Althernative Hypothesis: the observed order time is greater than the claim of 60 seconds wait time.
 
 
 ```python
 # Your solution here
+import scipy.stats as stats
+from math import sqrt
+import numpy as np
 
-
+z_stat = (75 - 60) / ( 30 / sqrt(36) )
+p = stats.norm.cdf(z_stat)
+print(z_stat)
+print(1 - p)
 # (p = 0.0013498980316301035, z = 3.0)
 ```
 
+    3.0
+    0.0013498980316301035
 
-```python
-# Interpret the results in terms of the p-value
 
+### Interpret the results in terms of the p-value
 
-```
+P-value is less than 0.05, so we can reject the null hypthosis, 
+wait times are significantly longer than the claim of 60 seconds.
 
 ## Exercise 2
 
@@ -52,26 +58,36 @@ Are our 25 students’ SAT scores significantly bigger than a population mean?
 
 *Note that the SAT preparation program claims that it will increase (and not decrease) the SAT score.  So, you can conduct a one-directional test. (alpha = .05).*
 
-
-```python
-# State your hypotheses 
-
-```
+### State your hypotheses 
+Null: there is no difference between SAT scores of students who prep vs. those who don't
+Alternative: there is a significantly higher SAT scores for students who prep vs. those who don't
 
 
 ```python
 # Give your solution here 
+sat = np.array([434, 694, 457, 534, 720, 400, 484, 478, 610, 641, 425, 636, 454, 
+                514, 563, 370, 499, 640, 501, 625, 612, 471, 598, 509, 531])
 
-
-
+z_stat = (sat.mean() - 500) / ( 100 / sqrt(len(sat)) )
+p = stats.norm.cdf(z_stat)
+print(sat.mean())
+print(len(sat))
+print(sat.std())
+print(z_stat)
+print( 1 - p)
 # p = 0.03593031911292577, z = 1.8
 ```
 
+    536.0
+    25
+    91.7121584087955
+    1.8
+    0.03593031911292577
 
-```python
-# Interpret the results in terms of the p-value
 
-```
+### Interpret the results in terms of the p-value
+We can reject the null hypothesis that there is no difference between students who
+prep at a significance level of p=0.04 (alpha p<0.05)
 
 ## Summary
 
